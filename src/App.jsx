@@ -3,6 +3,9 @@ import books from "./data/books";
 import BookCard from "./components/BookCard";
 import logo from "/assets/Logodosite.png";
 import ecos from "/assets/Ecos pro site.png";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import NotFound from "./pages/NotFound";
+import Home from "./pages/BookPage";
 
 export default function App() {
   return (
@@ -84,5 +87,18 @@ export default function App() {
         <div className="max-w-5xl mx-auto">© Saint Cat Studios</div>
       </footer>
     </div>
+  );
+  
+}
+
+export function error () {
+  return (
+  <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {/* suas outras rotas */}
+        <Route path="*" element={<NotFound />} /> {/* rota coringa */}
+      </Routes>
+    </BrowserRouter>
   );
 }
