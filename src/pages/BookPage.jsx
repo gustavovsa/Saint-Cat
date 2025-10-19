@@ -171,7 +171,7 @@ export default function BookPage() {
                 key={i}
                 onClick={() => setCharIndex(i)}
                 className={` rounded-full  ${
-                  i === charIndex ? "bg-gray-200 w-8 h-2" : "bg-gray-500/60 w-2 h-2 hover:bg-gray-800 hover:w-8 h-2"
+                  i === charIndex ? "bg-gray-200 w-8 h-2" : "bg-gray-500/60 w-2 hover:bg-gray-800 hover:w-8 h-2"
                 }`}
                 aria-label={`Ir para ${i + 1}`}
               />
