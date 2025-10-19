@@ -1,7 +1,7 @@
 import React from "react";
 import books from "./data/books";
 import BookCard from "./components/BookCard";
-import logo from "/assets/Logo do site.png";
+import logo from "/assets/Logodosite.png";
 import ecos from "/assets/Ecos pro site.png";
 
 export default function App() {
