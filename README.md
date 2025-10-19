@@ -1,6 +1,6 @@
 # Saint Cat Studios
 
-![Logo](.public/assets/Logodosite.png)
+![Logo](.src/assets/Logodosite.png)
 
 > Site oficial do universo literário Saint Cat — onde histórias, mundos e personagens ganham vida.  
 > Feito com **React + Vite + Tailwind CSS**.
