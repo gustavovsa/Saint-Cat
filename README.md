@@ -1,6 +1,6 @@
 # Saint Cat Studios
 
-![Logo](.src/assets/Logodosite.png)
+![Logo](src/assets/Logodosite.png)
 
 > Site oficial do universo literário Saint Cat — onde histórias, mundos e personagens ganham vida.  
 > Feito com **React + Vite + Tailwind CSS**.
@@ -25,7 +25,7 @@
 ---
 
 ##  Acesse o site
-[https://saint-cat.vercel.app](https://saint-cat.vercel.app)
+[https://saintcat.vercel.app](https://saintcat.vercel.app)
 
 ---
 
@@ -36,3 +36,4 @@ git clone https://github.com/gustavovsa/Saint-Cat.git
 cd saint-cat
 npm install
 npm run dev
+```
