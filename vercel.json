@@ -1,0 +1,4 @@
+{
+  "buildCommand": "npm rebuild esbuild && npm run build",
+  "outputDirectory": "dist"
+}
