@@ -41,11 +41,11 @@ links: {
 
     aviso: "Em breve",
     
-    characters: [
-      { name: "Jim", desc: "", img: "" },
-      { name: "Aidan", desc: "", img: "" },
-    ],
+    /*characters: [
+      { name: "Jim", desc: "", img: "assets/aidan.png" },
+      { name: "Aidan", desc: "", img: "assets/jim.png" },
+    ],*/
   },
 ];
-
+  
 export default books;

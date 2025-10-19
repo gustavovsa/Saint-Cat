@@ -20,20 +20,11 @@ export default function BookPage() {
 
   const chars = book.characters || [];
 
-  // autoplay opcional (comentar se não quiser)
-  /*useEffect(() => {
-    if (!chars.length) return;
-    const t = setInterval(() => {
-      setCharIndex((i) => (i + 1) % chars.length);
-    }, 6000);
-    return () => clearInterval(t);
-  }, [chars.length]);*/
-
   const prev = () => setCharIndex((i) => (i - 1 + chars.length) % chars.length);
   const next = () => setCharIndex((i) => (i + 1) % chars.length);
 
   return (
-    <div className="min-h-screen w-full max-w-5xl mx-auto p-6 bg-gray-90 text-gray-100 overflow-x-hidden">
+    <div className="min-h-screen w-full max-w-7xl mx-auto p-6 bg-gray-900 text-gray-100 overflow-x-hidden overflow-y-hidden">
       <Link
         to="/"
         className="text-sm bg-slate-950 p-2 rounded text-gray-300 hover:bg-slate-900"
@@ -42,18 +33,20 @@ export default function BookPage() {
       </Link>
 
       {/* capa + sinopse */}
-      <div className="mt-6 grid md:grid-cols-3 gap-6 items-start">
-        <div className="md:col-span-1 flex justify-center">
+      <div className="mt-8 grid md:grid-cols-3 gap-6 items-start overflow-y-hidden">
+        <div className="md:col-span-1 flex justify-center overflow-y-hidden">
           <img
             src={book.cover}
             alt={book.title}
-            className="max-w-80 w-full md:w-96 rounded-lg shadow-lg"
+            className="overflow-y-hidden w-full md:w-96 max-w-[420px] rounded-lg shadow-lg"
           />
         </div>
 
-        <div className="md:col-span-2">
-          <h1 className="text-3xl text-center font-extrabold">{book.title}</h1>
-          <p className="mt-4 text-center md:text-left text-gray-300">
+        <div className="md:col-span-2 overflow-y-hidden">
+          <h1 className="mt-32 text-4xl items-end justify-left md:text-center font-extrabold">
+            {book.title}
+          </h1>
+          <p className="mt-6 text-1xl items-end justify-left md:text-center font-normal">
             {book.full}
           </p>
 
@@ -69,21 +62,23 @@ export default function BookPage() {
               <a
                 href={book.links.prologo}
                 download
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded"
+                className="px-4 py-2 border-2 border-red-500 text-red-500 hover:bg-red-600 hover:text-white hover:border-red-600 rounded-full"
               >
                 Baixar Prólogo
               </a>
               <a
                 href={book.links.ebook}
                 target="_blank"
-                className="px-4 py-2 bg-slate-800 hover:bg-slate-900 rounded"
+                rel="noreferrer"
+                className="px-4 py-2 border-2 border-slate-500 text-slate-500 hover:bg-slate-900 hover:text-white hover:border-slate-900 rounded-full"
               >
                 Comprar eBook
               </a>
               <a
                 href={book.links.fisico}
                 target="_blank"
-                className="px-4 py-2 bg-zinc-700 hover:bg-zinc-900 rounded"
+                rel="noreferrer"
+                className="px-4 py-2 border-2 border-zinc-700 text-zinc-700 hover:bg-zinc-900 hover:text-white hover:border-zinc-900 rounded-full"
               >
                 Comprar Físico
               </a>
@@ -93,89 +88,102 @@ export default function BookPage() {
       </div>
 
       {/* personagens - carrossel */}
-      <h2 className="mt-10 text-xl font-bold text-center">Personagens</h2>
 
       {chars.length > 0 && (
-        <div className="mt-6 flex flex-col items-center">
-          <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
-            {/* área do vídeo/imagem */}
-            <div
-              className="bg-gray-800 rounded-lg overflow-hidden flex items-end justify-center p-0"
-              style={{ minHeight: 300 }}
-            >
-              {/* renderiza apenas o personagem ativo para evitar múltiplos vídeos rodando */}
-              {chars[charIndex] &&
-                (() => {
-                  const c = chars[charIndex];
-                  return (
-                    <div className="flex flex-col items-center">
-                      {/* personagem (vídeo ou img) */}
-                      {c.video ? (
-                        <motion.video
-                          src={c.video}
-                          poster={c.poster}
-                          className="relative z-20 w-80 p-0 m-0 h-auto object-contain"
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          preload="metadata"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5 }}
-                        />
-                      ) : (
-                        <motion.img
-                          src={c.img}
-                          alt={c.name}
-                          className="relative z-20 w-44 h-auto object-contain"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.5 }}
-                        />
-                      )}
-                    </div>
-                  );
-                })()}
-            </div>
+        <div className="bg-gray-950 bg-gradient-to-t from-black to-transparent rounded-lg mt-10 w-full flex flex-col md:flex-row items-center gap-0 pt-0">
+          {/* área do vídeo - esquerda (ocupa mais espaço) */}
+          <div
+            className="flex-0 bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center relative p-0"
+            style={{ minHeight: 320, maxHeight: 640 }}
+          >
+            {/* renderiza apenas o personagem ativo */}
+            {chars[charIndex] &&
+              (() => {
+                const c = chars[charIndex];
+                return (
+                  <div className="w-full flex items-center justify-center">
+                    {c.video ? (
+                      <motion.video
+                        src={c.video}
+                        poster={c.poster}
+                        className="w-full max-w-[380px] h-auto object-contain rounded"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                      />
+                    ) : (
+                      <motion.img
+                        src={c.img}
+                        alt={c.name}
+                        className="w-full max-w-[560px] h-auto object-contain rounded"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                      />
+                    )}
 
-            {/* controls */}
+                    {/* overlayes para borda esmaecida */}
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 rounded-lg"
+                      style={{ boxShadow: "inset 0 0 60px rgba(0,0,0,0.45)" }}
+                    />
+                    <div className="pointer-events-none absolute inset-y-0 left-0 w-16 rounded-l-lg bg-gradient-to-r from-black/60 to-transparent" />
+                    <div className="pointer-events-none absolute inset-y-0 right-0 w-16 rounded-r-lg bg-gradient-to-l from-black/60 to-transparent" />
+                    <div className="pointer-events-none absolute top-0 left-0 right-0 h-12 bg-gradient-to-b from-black/50 to-transparent" />
+                    <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/50 to-transparent" />
+                  </div>
+                );
+              })()}
+
+            {/* controls sobre o vídeo (centralizados verticalmente) */}
             <button
               onClick={prev}
               aria-label="Anterior"
-              className="absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60"
+              className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60"
             >
               ‹
             </button>
             <button
               onClick={next}
               aria-label="Próximo"
-              className="absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60"
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60"
             >
               ›
             </button>
           </div>
 
-          {/* descrição dinâmica */}
-          <div className="mt-4 w-full max-w-xs sm:max-w-sm md:max-w-md text-center">
-            <h3 className="font-semibold text-lg">{chars[charIndex].name}</h3>
-            <p className="text-sm text-gray-300 mt-2 break-words">
-              {chars[charIndex].desc}
-            </p>
-          </div>
+          {/* descrição - direita */}
+          <div className="w-full md:w-1/2 flex flex-col justify-center gap-4 p-4 md:p-10 md:translate-y-3 md:translate-x-32">
+            <div className="rounded-lg p-4 md:p-6 flex flex-col items-center justify-center h-full min-h-[320px]">
+              <h3 className="font-bold text-2xl md:text-4xl leading-tight">
+                {chars[charIndex].name}
+              </h3>
+              <p className="text-gray-300 mt-2 break-words text-justify md:text-xl leading-relaxed">
+                {chars[charIndex].desc}
+              </p>
+            </div>
 
-          {/* dots */}
-          <div className="mt-6 flex gap-2 ">
-            {chars.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCharIndex(i)}
-                className={` rounded-full  ${
-                  i === charIndex ? "bg-gray-200 w-8 h-2" : "bg-gray-500/60 w-2 hover:bg-gray-800 hover:w-8 h-2"
-                }`}
-                aria-label={`Ir para ${i + 1}`}
-              />
-            ))}
+            {/* dots */}
+            <div className="flex gap-2 justify-center md:justify-center mt-2">
+              {chars.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCharIndex(i)}
+                  className={`rounded-full transition-all duration-200 ${
+                    i === charIndex
+                      ? "bg-gray-200 w-8 h-2"
+                      : "bg-gray-500/60 w-2 h-2 hover:bg-gray-800 hover:w-8"
+                  }`}
+                  aria-label={`Ir para ${i + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       )}
