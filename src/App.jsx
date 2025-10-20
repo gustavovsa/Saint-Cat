@@ -3,7 +3,6 @@ import books from "./data/books";
 import BookCard from "./components/BookCard";
 import logo from "/assets/Logodosite.png";
 import ecos from "/assets/Ecos pro site.png";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/BookPage";
 
 export default function App() {

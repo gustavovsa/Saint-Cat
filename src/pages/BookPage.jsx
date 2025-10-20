@@ -12,8 +12,13 @@ export default function BookPage() {
 
   if (!book) {
     return (
-      <div className="p-8">
-        Livro não encontrado. <Link to="/">Voltar</Link>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-black text-gray-100 p-6">
+        <h1 className="text-4xl font-bold mb-4">Livro não encontrado</h1>
+        <p className="mb-6">Você não deveria estar aqui...</p>
+        <img src="" alt="" />
+        <Link to="/" className="text-blue-500 hover:underline">
+          Voltar ao fluxo de tempo
+        </Link>
       </div>
     );
   }
